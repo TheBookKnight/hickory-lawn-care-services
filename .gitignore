@@ -1,0 +1,29 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET Build and Release Outputs
+bin/
+obj/
+Debug/
+Release/
+publish/
+
+# Test results
+TestResults/
+*.trx
+*.xml
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+.angular/

@@ -1,4 +1,4 @@
-.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell
+.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell test
 
 build:
 	echo "Building Docker containers..."
@@ -77,5 +77,10 @@ start-api:
 stop-api:
 	echo "Stopping the api!"
 	pkill -f dotnet || true
+
+test:
+	@echo "Running backend API tests..."
+	cd backend && dotnet test
+
 
 

@@ -58,6 +58,28 @@ The API will be exposed on **`http://localhost:5291`** (HTTP) and `https://local
 
 ---
 
+## Running Integration Tests
+
+Integration tests are implemented using **xUnit** and **WebApplicationFactory**. They run against a local in-memory database instance (`Microsoft.EntityFrameworkCore.InMemory`) and do not require SQL Server to be running.
+
+### Option A: From Repository Root (using Makefile)
+You can run all backend tests from the root of the repository:
+```bash
+make test
+```
+
+### Option B: From Backend Directory (using dotnet CLI)
+1. Navigate to the backend folder:
+   ```bash
+   cd backend
+   ```
+2. Run the tests:
+   ```bash
+   dotnet test
+   ```
+
+---
+
 ## API Documentation (OpenAPI / Swagger)
 
 This API includes native support for OpenAPI document generation. When running in the `Development` environment, the raw OpenAPI JSON specification is available at:

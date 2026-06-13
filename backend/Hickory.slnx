@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Hickory.Api/Hickory.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Hickory.Api.Tests/Hickory.Api.Tests.csproj" />
+  </Folder>
+</Solution>
