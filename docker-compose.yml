@@ -23,6 +23,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_RUNNING_IN_CONTAINER=true
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=HickoryLawnCare;User Id=sa;Password=HickoryLawnCare@2026!;TrustServerCertificate=True;
     depends_on:
       - db
     restart: unless-stopped
