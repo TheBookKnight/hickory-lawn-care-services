@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hickory.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c6dab55c3baec75810672c5f3cadbb4b2254adc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0211d3c97e36ddeee40f6f5f05f5f88f9bffe493")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hickory.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hickory.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
