@@ -1,4 +1,4 @@
-.PHONY: build start stop health start-app stop-app start-api stop-api
+.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell test
 
 build:
 	echo "Building Docker containers..."
@@ -11,6 +11,27 @@ start:
 stop:
 	echo "Stopping Docker containers..."
 	docker compose down
+
+db-init:
+	@echo "Waiting for SQL Server to be ready..."
+	@for i in {1..30}; do \
+		docker compose exec -T db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "HickoryLawnCare@2026!" -C -Q "SELECT 1" >/dev/null 2>&1 && echo "SQL Server is ready!" && break; \
+		echo "Waiting for database to be ready... ($$i/30)"; \
+		sleep 1; \
+	done
+	@echo "Running SQL initialization scripts..."
+	docker compose exec -T db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "HickoryLawnCare@2026!" -C -i /database/01-create-database.sql
+	docker compose exec -T db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "HickoryLawnCare@2026!" -C -i /database/02-create-schema.sql
+	docker compose exec -T db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "HickoryLawnCare@2026!" -C -i /database/03-seed-data.sql
+	@echo "Database initialization complete!"
+
+db-reset:
+	@echo "Dropping database HickoryLawnCare..."
+	docker compose exec -T db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "HickoryLawnCare@2026!" -C -Q "IF EXISTS (SELECT * FROM sys.databases WHERE name = 'HickoryLawnCare') BEGIN ALTER DATABASE HickoryLawnCare SET SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE HickoryLawnCare; END"
+	$(MAKE) db-init
+
+db-shell:
+	docker compose exec -it db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "HickoryLawnCare@2026!" -C
 
 health:
 	@echo "Checking services health..."
@@ -56,5 +77,10 @@ start-api:
 stop-api:
 	echo "Stopping the api!"
 	pkill -f dotnet || true
+
+test:
+	@echo "Running backend API tests..."
+	cd backend && dotnet test
+
 
 
