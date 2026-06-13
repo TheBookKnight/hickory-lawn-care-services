@@ -1,4 +1,18 @@
 services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: hickory-db
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=HickoryLawnCare@2026!
+    volumes:
+      - mssql-data:/var/opt/mssql
+      - ./database:/database
+    restart: unless-stopped
+
   backend-api:
     build:
       context: ./backend
@@ -9,6 +23,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_RUNNING_IN_CONTAINER=true
+    depends_on:
+      - db
     restart: unless-stopped
 
   frontend-app:
@@ -21,3 +37,6 @@ services:
     depends_on:
       - backend-api
     restart: unless-stopped
+
+volumes:
+  mssql-data:
