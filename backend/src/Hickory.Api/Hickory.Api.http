@@ -1,6 +1,29 @@
 @Hickory.Api_HostAddress = http://localhost:5291
 
-GET {{Hickory.Api_HostAddress}}/weatherforecast/
+### Health Check
+GET {{Hickory.Api_HostAddress}}/health
 Accept: application/json
 
-###
+### Get All Service Requests
+GET {{Hickory.Api_HostAddress}}/api/servicerequests
+Accept: application/json
+
+### Get Service Request by ID
+GET {{Hickory.Api_HostAddress}}/api/servicerequests/1
+Accept: application/json
+
+### Create New Service Request
+POST {{Hickory.Api_HostAddress}}/api/servicerequests
+Content-Type: application/json
+
+{
+  "customerName": "John Doe",
+  "phone": "555-9999",
+  "address": "777 Hickory Lane",
+  "serviceType": "Irrigation",
+  "description": "Sprinkler zone 2 not turning on."
+}
+
+### Weather Forecast (Default Example)
+GET {{Hickory.Api_HostAddress}}/weatherforecast/
+Accept: application/json
