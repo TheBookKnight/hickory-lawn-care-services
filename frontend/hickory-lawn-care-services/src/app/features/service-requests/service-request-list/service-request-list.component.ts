@@ -5,7 +5,7 @@ import { ServiceRequestService } from "../../../core/services/service-request.se
 @Component({
     selector: 'app-service-request-list',
     templateUrl: './service-request-list.component.html',
-    styleUrl: './service-request-list.component.css'
+    // styleUrl: './service-request-list.component.css' // TODO: Add styling later
 })
 export class ServiceRequestListComponent {
     // Inject the service
