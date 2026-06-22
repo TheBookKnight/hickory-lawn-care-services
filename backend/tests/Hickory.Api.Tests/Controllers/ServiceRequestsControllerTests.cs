@@ -40,7 +40,8 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
                 Phone = "123-456",
                 Address = "123 Test St",
                 ServiceType = "Mowing",
-                Description = "Mow the lawn"
+                Description = "Mow the lawn",
+                PreferredDate = new DateTime(2026, 6, 23, 9, 0, 0, DateTimeKind.Utc)
             });
         });
 
@@ -79,7 +80,8 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
             Phone = "987-654",
             Address = "456 Test Ave",
             ServiceType = "Weeding",
-            Description = "Pull weeds"
+            Description = "Pull weeds",
+            PreferredDate = new DateTime(2026, 6, 24, 10, 0, 0, DateTimeKind.Utc)
         };
 
         SeedDatabase(db =>
@@ -95,6 +97,7 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
         var result = await response.Content.ReadFromJsonAsync<ServiceRequest>();
         Assert.NotNull(result);
         Assert.Equal("Jane Test", result.CustomerName);
+        Assert.Equal(request.PreferredDate, result.PreferredDate);
         Assert.Equal(request.Id, result.Id);
     }
 
@@ -109,7 +112,8 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
             Phone = "555-1234",
             Address = "789 Test Rd",
             ServiceType = "Aeration",
-            Description = "Aerate front yard"
+            Description = "Aerate front yard",
+            PreferredDate = new DateTime(2026, 6, 25, 11, 0, 0, DateTimeKind.Utc)
         };
 
         // Act
@@ -122,6 +126,7 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
         Assert.NotNull(created);
         Assert.True(created.Id > 0);
         Assert.Equal(dto.CustomerName, created.CustomerName);
+        Assert.Equal(dto.PreferredDate, created.PreferredDate);
         Assert.Equal("New", created.Status);
 
         // Verify it actually exists in database
@@ -130,5 +135,6 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
         var dbRequest = await db.ServiceRequests.FindAsync(created.Id);
         Assert.NotNull(dbRequest);
         Assert.Equal(dto.CustomerName, dbRequest.CustomerName);
+        Assert.Equal(dto.PreferredDate, dbRequest.PreferredDate);
     }
 }

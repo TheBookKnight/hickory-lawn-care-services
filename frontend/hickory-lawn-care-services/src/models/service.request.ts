@@ -9,6 +9,7 @@ export interface ServiceRequest {
     address: string;
     serviceType: string;
     description: string;
+    preferredDate: string;
     status: string;
     createdAt: string; // TODO: consider using Date object
 }
@@ -22,4 +23,5 @@ export interface CreateServiceRequest {
     address: string;
     serviceType: string;
     description: string;
+    preferredDate: string;
 }

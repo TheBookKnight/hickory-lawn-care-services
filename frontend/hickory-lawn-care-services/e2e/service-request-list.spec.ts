@@ -12,6 +12,7 @@ test.describe('Service Request List Component', () => {
         address: '123 Maple St',
         serviceType: 'Lawn Mowing',
         description: 'Mow the front yard lawn',
+        preferredDate: '2026-06-22T09:00:00Z',
         status: 'Pending',
         createdAt: '2026-06-21T10:00:00Z',
       },
@@ -22,6 +23,7 @@ test.describe('Service Request List Component', () => {
         address: '456 Oak Ave',
         serviceType: 'Tree Trimming',
         description: 'Trim the branches in the backyard',
+        preferredDate: '2026-06-25T14:00:00Z',
         status: 'Completed',
         createdAt: '2026-06-20T14:30:00Z',
       }
@@ -63,6 +65,7 @@ test.describe('Service Request List Component', () => {
     await expect(headers).toHaveText([
       'Customer Name',
       'Service Type',
+      'Preferred Date',
       'Status',
       'Created Date'
     ]);
@@ -76,6 +79,7 @@ test.describe('Service Request List Component', () => {
     await expect(firstRowCells).toHaveText([
       'Alice Smith',
       'Lawn Mowing',
+      '2026-06-22T09:00:00Z',
       'Pending',
       '2026-06-21T10:00:00Z'
     ]);
@@ -85,6 +89,7 @@ test.describe('Service Request List Component', () => {
     await expect(secondRowCells).toHaveText([
       'Bob Jones',
       'Tree Trimming',
+      '2026-06-25T14:00:00Z',
       'Completed',
       '2026-06-20T14:30:00Z'
     ]);

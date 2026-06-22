@@ -15,6 +15,7 @@ public class ServiceRequest
     public string Address { get; set; } = string.Empty;
     public string ServiceType { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    public DateTime PreferredDate { get; set; }
     public string Status { get; set; } = "New";
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

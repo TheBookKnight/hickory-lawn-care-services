@@ -51,6 +51,7 @@ public class ServiceRequestsController : ControllerBase
             Address = dto.Address,
             ServiceType = dto.ServiceType,
             Description = dto.Description,
+            PreferredDate = dto.PreferredDate,
             Status = "New" // Automatically set a default status for new entries
         };
 
