@@ -1,0 +1,44 @@
+<div class="service-request-container">
+    <h2>Service Requests</h2>
+
+    <!-- Loading State -->
+    @if (requests.isLoading()) {
+    <p>Loading service requests...</p>
+    }
+
+    <!-- Completed State with Data -->
+    @else if (requests.value() !== undefined) {
+
+    <!-- Empty State -->
+    @if (requests.value()?.length === 0) {
+    <p>No service requests found.</p>
+    }
+
+    <!-- Table State -->
+    @else {
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Service Type</th>
+                <th>Preferred Date</th>
+                <th>Status</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through the requests -->
+            @for (request of requests.value(); track request.id) {
+            <tr>
+                <td>{{ request.customerName }}</td>
+                <td>{{ request.serviceType }}</td>
+                <td>{{ request.preferredDate | date: "yyyy-MM-dd'T'HH:mm:ss" }}</td>
+                <td>{{ request.status }}</td>
+                <td>{{ request.createdAt | date: "yyyy-MM-dd'T'HH:mm:ss" }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+    }
+</div>

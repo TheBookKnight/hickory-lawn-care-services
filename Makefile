@@ -1,4 +1,4 @@
-.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell test
+.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell test test-e2e test-e2e-ui
 
 build:
 	echo "Building Docker containers..."
@@ -81,6 +81,14 @@ stop-api:
 test:
 	@echo "Running backend API tests..."
 	cd backend && dotnet test
+
+test-e2e:
+	@echo "Running frontend E2E/integration tests in headless mode..."
+	cd frontend/hickory-lawn-care-services && npm run e2e
+
+test-e2e-ui:
+	@echo "Running frontend E2E/integration tests in UI mode..."
+	cd frontend/hickory-lawn-care-services && npm run e2e:ui
 
 
 
