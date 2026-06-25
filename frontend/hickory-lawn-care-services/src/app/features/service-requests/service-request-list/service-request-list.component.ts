@@ -1,9 +1,11 @@
 import { Component, inject } from "@angular/core";
+import { DatePipe } from "@angular/common";
 import { ServiceRequestService } from "../../../core/services/service-request.service";
 
 
 @Component({
     selector: 'app-service-request-list',
+    imports: [DatePipe],
     templateUrl: './service-request-list.component.html',
     // styleUrl: './service-request-list.component.css' // TODO: Add styling later
 })

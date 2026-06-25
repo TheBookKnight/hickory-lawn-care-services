@@ -32,9 +32,9 @@
             <tr>
                 <td>{{ request.customerName }}</td>
                 <td>{{ request.serviceType }}</td>
-                <td>{{ request.preferredDate }}</td>
+                <td>{{ request.preferredDate | date: "yyyy-MM-dd'T'HH:mm:ss" }}</td>
                 <td>{{ request.status }}</td>
-                <td>{{ request.createdAt }}</td>
+                <td>{{ request.createdAt | date: "yyyy-MM-dd'T'HH:mm:ss" }}</td>
             </tr>
             }
         </tbody>
