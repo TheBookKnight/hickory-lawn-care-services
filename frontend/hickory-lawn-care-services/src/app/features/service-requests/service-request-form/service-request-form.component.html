@@ -1,0 +1,48 @@
+<div class="form-container">
+    <h2>Submit Service Request</h2>
+
+    @if (successMessage) {
+        <div class="success-alert">
+            {{ successMessage }}
+        </div>
+    }
+
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input id="customerName" type="text" formControlName="customerName" />
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" type="text" formControlName="phone" />
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input id="address" type="text" formControlName="address" />
+        </div>
+
+        <div class="form-group">
+            <label for="serviceType">Service Type</label>
+            <select id="serviceType" formControlName="serviceType">
+                <option value="">Select a service</option>
+                <option value="Lawn Care">Lawn Care</option>
+                <option value="Tree Removal">Tree Removal</option>
+                <option value="Irrigation">Irrigation</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="preferredDate">Preferred Date</label>
+            <input id="preferredDate" type="datetime-local" formControlName="preferredDate" />
+        </div>
+
+        <div class="form-group">
+            <label for="comments">Description / Comments</label>
+            <textarea id="comments" formControlName="comments"></textarea>
+        </div>
+
+        <button type="submit" [disabled]="!requestForm.valid">Submit</button>
+    </form>
+</div>
