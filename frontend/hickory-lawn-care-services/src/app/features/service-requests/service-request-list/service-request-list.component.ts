@@ -8,7 +8,7 @@ import { ServiceRequestReviewModalComponent } from "../service-request-detail/se
     selector: 'app-service-request-list',
     imports: [DatePipe, ServiceRequestReviewModalComponent],
     templateUrl: './service-request-list.component.html',
-    // styleUrl: './service-request-list.component.css' // TODO: Add styling later
+    styleUrl: './service-request-list.component.css'
 })
 export class ServiceRequestListComponent implements OnInit {
     // Inject the service
