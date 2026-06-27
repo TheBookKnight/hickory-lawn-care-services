@@ -1,0 +1,12 @@
+<!-- A simple backdrop for the modal -->
+<div class="modal-backdrop">
+    <div class="modal-content">
+        <h2>Review Request</h2>
+
+        <!-- We read the signal input by calling it with parentheses -->
+        <p><strong>Customer:</strong> {{ request().customerName }}</p>
+        <p><strong>Service:</strong> {{ request().serviceType }}</p>
+
+        <button (click)="onClose()">Close</button>
+    </div>
+</div>
