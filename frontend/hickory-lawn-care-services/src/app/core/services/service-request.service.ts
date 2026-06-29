@@ -18,6 +18,16 @@ export class ServiceRequestService {
     // TODO: Is Axios better?
     requestsResource = httpResource<ServiceRequest[]>(() => this.apiUrl);
 
+    // method to get all requests
+    getAll() {
+        return this.http.get<ServiceRequest[]>(this.apiUrl);
+    }
+
+    // method to get a request by id
+    getById(id: string | number) {
+        return this.http.get<ServiceRequest>(`${this.apiUrl}/${id}`);
+    }
+
     // method to create a request
     create(request: CreateServiceRequest) {
         return this.http.post<ServiceRequest>(this.apiUrl, request);
