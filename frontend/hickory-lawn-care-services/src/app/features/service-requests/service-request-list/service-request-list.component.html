@@ -1,8 +1,13 @@
 <div class="service-request-container">
     <h2>Service Requests</h2>
 
+    <!-- Error State -->
+    @if (requests.error()) {
+    <p class="error-message">Failed to load service requests. Please try again later.</p>
+    }
+
     <!-- Loading State -->
-    @if (requests.isLoading()) {
+    @else if (requests.isLoading()) {
     <p>Loading service requests...</p>
     }
 

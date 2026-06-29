@@ -79,9 +79,9 @@ test.describe('Service Request List Component', () => {
     await expect(firstRowCells).toHaveText([
       'Alice Smith',
       'Lawn Mowing',
-      '2026-06-22T09:00:00',
-      'Pending',
-      '2026-06-21T10:00:00'
+      'Jun 22, 2026, 9:00 AM',
+      ' Pending ',
+      'Jun 21, 2026, 10:00 AM'
     ]);
 
     // Row 2
@@ -89,9 +89,9 @@ test.describe('Service Request List Component', () => {
     await expect(secondRowCells).toHaveText([
       'Bob Jones',
       'Tree Trimming',
-      '2026-06-25T14:00:00',
-      'Completed',
-      '2026-06-20T14:30:00'
+      'Jun 25, 2026, 2:00 PM',
+      ' Completed ',
+      'Jun 20, 2026, 2:30 PM'
     ]);
   });
 

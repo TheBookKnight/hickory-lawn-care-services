@@ -43,6 +43,20 @@ export class ServiceRequestReviewModalComponent {
         this.isEditing.set(!this.isEditing());
     }
 
+    isSaveDisabled(): boolean {
+        const descLen = this.updateModel().description?.length ?? 0;
+        const notesLen = this.updateModel().internalNotes?.length ?? 0;
+        const isInvalid = descLen > 250 || notesLen > 500;
+        
+        if (isInvalid) return true;
+
+        const isUnchanged = this.updateModel().status === this.request().status &&
+                            this.updateModel().description === this.request().description &&
+                            (this.updateModel().internalNotes || '') === (this.request().internalNotes || '');
+        
+        return isUnchanged;
+    }
+
     onClose() {
         // Fire the custom event
         this.closeModal.emit();
