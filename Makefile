@@ -1,4 +1,4 @@
-.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell test test-e2e test-e2e-ui
+.PHONY: build start stop health start-app stop-app start-api stop-api db-init db-reset db-shell test test-unit test-backend test-e2e test-e2e-ui
 
 build:
 	echo "Building Docker containers..."
@@ -78,7 +78,13 @@ stop-api:
 	echo "Stopping the api!"
 	pkill -f dotnet || true
 
-test:
+test: test-unit test-backend
+
+test-unit:
+	@echo "Running frontend unit tests..."
+	cd frontend/hickory-lawn-care-services && npm run test
+
+test-backend:
 	@echo "Running backend API tests..."
 	cd backend && dotnet test
 
