@@ -30,6 +30,12 @@ export class ServiceRequestListComponent implements OnInit {
         this.selectedRequest.set(null);
     }
 
+    // handle request updates to refresh list data and modal input
+    onRequestUpdated(updatedRequest: ServiceRequest) {
+        this.serviceRequestService.requestsResource.reload();
+        this.selectedRequest.set(updatedRequest);
+    }
+
     ngOnInit() {
         // Force a reload of the service requests list when the component loads
         this.serviceRequestService.requestsResource.reload();

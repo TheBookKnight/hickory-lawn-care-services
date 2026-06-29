@@ -67,24 +67,85 @@ p strong {
     /* Aligns the labels neatly */
 }
 
-button {
-    background-color: var(--border-color);
-    color: var(--text-primary);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 0.75rem 1.5rem;
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    margin-top: 1.5rem;
-    display: block;
-    width: 100%;
-    text-align: center;
+.form-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
 }
 
-button:hover {
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    width: 100%;
+}
+
+button {
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-align: center;
+    width: 100%;
+}
+
+.button-group button {
+    flex: 1;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--background-dark);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
     background-color: var(--card-hover);
-    color: var(--primary-color);
+    border-color: var(--text-muted);
 }

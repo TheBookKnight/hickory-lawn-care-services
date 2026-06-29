@@ -22,4 +22,9 @@ export class ServiceRequestService {
     create(request: CreateServiceRequest) {
         return this.http.post<ServiceRequest>(this.apiUrl, request);
     }
+
+    // method to update a request
+    update(id: string | number, request: Partial<ServiceRequest>) {
+        return this.http.put<ServiceRequest>(`${this.apiUrl}/${id}`, request);
+    }
 }

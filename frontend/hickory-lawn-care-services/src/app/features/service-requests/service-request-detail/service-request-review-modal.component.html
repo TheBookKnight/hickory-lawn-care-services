@@ -31,8 +31,8 @@
         </div>
 
         <div class="button-group">
-            <button (click)="onSave()">Save Changes</button>
-            <button (click)="toggleEdit()">Cancel</button>
+            <button class="btn-primary" (click)="onSave()">Save Changes</button>
+            <button class="btn-secondary" (click)="toggleEdit()">Cancel</button>
         </div>
 
         } @else {
@@ -42,8 +42,8 @@
         <p><strong>Internal Notes:</strong> {{ request().internalNotes || 'None' }}</p>
 
         <div class="button-group">
-            <button (click)="toggleEdit()">Edit</button>
-            <button (click)="onClose()">Close</button>
+            <button class="btn-primary" (click)="toggleEdit()">Edit</button>
+            <button class="btn-secondary" (click)="onClose()">Close</button>
         </div>
         }
     </div>
