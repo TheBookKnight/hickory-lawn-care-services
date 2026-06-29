@@ -12,7 +12,8 @@ BEGIN
         Description NVARCHAR(MAX) NOT NULL,
         PreferredDate DATETIME2 NOT NULL,
         Status NVARCHAR(50) NOT NULL,
-        CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE()
+        CreatedAt DATETIME2 NOT NULL DEFAULT GETUTCDATE(),
+        InternalNotes NVARCHAR(MAX) NULL
     );
     PRINT 'Table ServiceRequests created successfully.';
 END

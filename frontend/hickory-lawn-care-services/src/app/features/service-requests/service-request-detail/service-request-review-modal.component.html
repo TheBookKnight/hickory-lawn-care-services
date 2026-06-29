@@ -1,0 +1,50 @@
+<!-- A simple backdrop for the modal -->
+<div class="modal-backdrop">
+    <div class="modal-content">
+        <h2>Review Request</h2>
+
+        <!-- We read the signal input by calling it with parentheses -->
+        <p><strong>Customer:</strong> {{ request().customerName }}</p>
+        <p><strong>Service:</strong> {{ request().serviceType }}</p>
+
+        <!-- Check if we are editing -->
+        @if (isEditing()) {
+        <div class="form-group">
+            <label>Status</label>
+            <!-- Two-way bind to the Signal Form -->
+            <select [formField]="updateForm.status">
+                <option value="new">New</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="completed">Completed</option>
+                <option value="quoted">Quoted</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea [formField]="updateForm.description" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Internal Notes</label>
+            <textarea [formField]="updateForm.internalNotes" rows="3"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" (click)="onSave()">Save Changes</button>
+            <button class="btn-secondary" (click)="toggleEdit()">Cancel</button>
+        </div>
+
+        } @else {
+        <!-- Read-Only View -->
+        <p><strong>Status:</strong> {{ request().status }}</p>
+        <p><strong>Description:</strong> {{ request().description }}</p>
+        <p><strong>Internal Notes:</strong> {{ request().internalNotes || 'None' }}</p>
+
+        <div class="button-group">
+            <button class="btn-primary" (click)="toggleEdit()">Edit</button>
+            <button class="btn-secondary" (click)="onClose()">Close</button>
+        </div>
+        }
+    </div>
+</div>

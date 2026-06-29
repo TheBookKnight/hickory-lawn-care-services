@@ -8,7 +8,7 @@ import { RouterOutlet } from "@angular/router";
     // to display routed components on the screen
     imports: [RouterOutlet],
     templateUrl: './app.component.html',
-    // styleUrl: './app.component.css' // TODO: Add styling later
+    styleUrl: './app.css'
 })
 export class AppComponent {
     title = 'Hickory Lawn Care Services'

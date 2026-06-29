@@ -65,4 +65,27 @@ public class ServiceRequestsController : ControllerBase
         // This looks for your GET endpoint to build the location URL header
         return CreatedAtAction(nameof(GetServiceRequest), new { id = serviceRequest.Id }, serviceRequest);
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ServiceRequest>> UpdateServiceRequest(int id, [FromBody] UpdateServiceRequestDto dto)
+    {
+        // 1. Fetch the existing record
+        var serviceRequest = await _context.ServiceRequests.FindAsync(id);
+
+        if (serviceRequest == null)
+        {
+            return NotFound();
+        }
+
+        // 2. Update ONLY the allowed fields
+        serviceRequest.Status = dto.Status;
+        serviceRequest.Description = dto.Description;
+        serviceRequest.InternalNotes = dto.InternalNotes;
+
+        // 3. Persist changes to the database
+        await _context.SaveChangesAsync();
+
+        // 4. Return the updated entity
+        return Ok(serviceRequest);
+    }
 }

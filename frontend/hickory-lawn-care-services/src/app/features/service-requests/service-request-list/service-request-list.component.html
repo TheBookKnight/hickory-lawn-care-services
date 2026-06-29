@@ -29,16 +29,34 @@
         <tbody>
             <!-- Loop through the requests -->
             @for (request of requests.value(); track request.id) {
-            <tr>
+            <tr (click)="openModal(request)" style="cursor: pointer;">
                 <td>{{ request.customerName }}</td>
                 <td>{{ request.serviceType }}</td>
-                <td>{{ request.preferredDate | date: "yyyy-MM-dd'T'HH:mm:ss" }}</td>
-                <td>{{ request.status }}</td>
-                <td>{{ request.createdAt | date: "yyyy-MM-dd'T'HH:mm:ss" }}</td>
+                <td>{{ request.preferredDate | date: "MMM d, y, h:mm a" }}</td>
+                <td>
+                    <span class="status-badge" [class]="request.status.toLowerCase()">
+                        {{ request.status }}
+                    </span>
+                </td>
+                <td>{{ request.createdAt | date: "MMM d, y, h:mm a" }}</td>
             </tr>
             }
         </tbody>
     </table>
+
+    <!-- NEW: Conditionally render the modal if we have a selected request -->
+    @if (selectedRequest()) {
+    <!-- 
+    [request] is Property Binding passing data TO the child.
+    (closeModal) is Event Binding receiving the custom event FROM the child.
+    Notice the ! after selectedRequest() - this tells TypeScript we know it's not null here.
+  -->
+    <app-service-request-review-modal 
+        [request]="selectedRequest()!" 
+        (closeModal)="closeModal()"
+        (requestUpdated)="onRequestUpdated($event)">
+    </app-service-request-review-modal>
+    }
     }
     }
 </div>

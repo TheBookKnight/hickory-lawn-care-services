@@ -137,4 +137,84 @@ public class ServiceRequestsControllerTests : IClassFixture<HickoryApiWebApplica
         Assert.Equal(dto.CustomerName, dbRequest.CustomerName);
         Assert.Equal(dto.PreferredDate, dbRequest.PreferredDate);
     }
+
+    [Fact]
+    public async Task UpdateServiceRequest_WithValidData_UpdatesOnlyAllowedFields()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var request = new ServiceRequest
+        {
+            CustomerName = "Charlie Original",
+            Phone = "111-222",
+            Address = "123 Main St",
+            ServiceType = "Mowing",
+            Description = "Original description",
+            PreferredDate = new DateTime(2026, 6, 26, 8, 0, 0, DateTimeKind.Utc),
+            Status = "New"
+        };
+
+        SeedDatabase(db =>
+        {
+            db.ServiceRequests.Add(request);
+        });
+
+        var dto = new UpdateServiceRequestDto
+        {
+            Status = "Completed",
+            Description = "Updated description",
+            InternalNotes = "Task completed successfully."
+        };
+
+        // Act
+        var response = await client.PutAsJsonAsync($"/api/servicerequests/{request.Id}", dto);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var updated = await response.Content.ReadFromJsonAsync<ServiceRequest>();
+        Assert.NotNull(updated);
+        Assert.Equal(request.Id, updated.Id);
+        Assert.Equal(dto.Status, updated.Status);
+        Assert.Equal(dto.Description, updated.Description);
+        Assert.Equal(dto.InternalNotes, updated.InternalNotes);
+        
+        // Ensure read-only properties did not change
+        Assert.Equal("Charlie Original", updated.CustomerName);
+        Assert.Equal("111-222", updated.Phone);
+        Assert.Equal("123 Main St", updated.Address);
+        Assert.Equal("Mowing", updated.ServiceType);
+        Assert.Equal(request.PreferredDate, updated.PreferredDate);
+        Assert.Equal(request.CreatedAt, updated.CreatedAt);
+
+        // Verify changes in the actual database
+        using var scope = _factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var dbRequest = await db.ServiceRequests.FindAsync(request.Id);
+        Assert.NotNull(dbRequest);
+        Assert.Equal(dto.Status, dbRequest.Status);
+        Assert.Equal(dto.Description, dbRequest.Description);
+        Assert.Equal(dto.InternalNotes, dbRequest.InternalNotes);
+        Assert.Equal("Charlie Original", dbRequest.CustomerName);
+    }
+
+    [Fact]
+    public async Task UpdateServiceRequest_WithInvalidId_ReturnsNotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var dto = new UpdateServiceRequestDto
+        {
+            Status = "Completed",
+            Description = "Test",
+            InternalNotes = "Notes"
+        };
+
+        // Act
+        var response = await client.PutAsJsonAsync("/api/servicerequests/99999", dto);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
 }

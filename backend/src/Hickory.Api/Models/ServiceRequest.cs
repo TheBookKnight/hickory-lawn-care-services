@@ -23,6 +23,7 @@ public class ServiceRequest
     }
 
     public string Status { get; set; } = "New";
+    public string? InternalNotes { get; set; }
 
     private DateTime _createdAt = TruncateToSeconds(DateTime.UtcNow);
     public DateTime CreatedAt
