@@ -11,6 +11,7 @@ export interface ServiceRequest {
     description: string;
     preferredDate: string;
     status: string;
+    internalNotes?: string | null;
     createdAt: string; // TODO: consider using Date object
 }
 
